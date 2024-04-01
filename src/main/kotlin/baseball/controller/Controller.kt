@@ -19,24 +19,30 @@ class Controller(
 
     fun game() {
         outputView.printStartMessage()
-        while(true) {
-            outputView.printInputMessage()
-            getUserNumber()
-            calculate()
-            showResult()
+        do {
+            processGame()
             if (answer.strikeCount == WIN_COUNT) {
-                outputView.printEndMessage()
-                getGameFlag()
-                if (flag.flag!!) {
-                    number.generateNumber()
-                    continue
-                }
-                break
+                exitGame()
             }
+        } while (flag.flag)
+    }
+
+    private fun processGame() {
+        outputView.printInputMessage()
+        getUserNumber()
+        calculate()
+        showResult()
+    }
+
+    private fun exitGame() {
+        outputView.printEndMessage()
+        getGameFlag()
+        if(flag.flag) {
+            number.generateNumber()
         }
     }
 
-    private fun getGameFlag() { //게임 플래그 확인, 1이면 재시작, 2면 종료
+    private fun getGameFlag() { //게임 플래그 입력
         var isValid = false
         while(!isValid) {
             try {
@@ -71,7 +77,7 @@ class Controller(
     private fun calculate() { //매칭 결과 계산
         val number = number.number
         val input = user.input
-        answer = Answer()
+        answer.initCount()
         answer.calculateResult(number, input!!)
     }
 }
