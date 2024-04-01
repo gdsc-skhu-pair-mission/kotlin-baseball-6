@@ -1,13 +1,20 @@
 package baseball.model
 
-class Flag {
-    private var _flag: Boolean? = null
+import baseball.util.Constants.END_FLAG
+import baseball.util.Constants.START_FLAG
 
-    val flag: Boolean?
+class Flag {
+    private var _flag: Boolean
+
+    val flag: Boolean
         get() = _flag
 
+    init {
+        _flag = true
+    }
+
     fun setFlag(input: String) {
-        if (input.trim() == "1") this._flag = true
-        if (input.trim() == "2") this._flag = false
+        if (input.trim() == START_FLAG) this._flag = true
+        if (input.trim() == END_FLAG) this._flag = false
     }
 }

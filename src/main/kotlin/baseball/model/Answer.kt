@@ -1,8 +1,10 @@
 package baseball.model
 
+import baseball.util.Constants.ZERO
+
 class Answer {
-    private var _ballCount = 0
-    private var _strikeCount = 0
+    private var _ballCount = ZERO
+    private var _strikeCount = ZERO
 
     val ballCount: Int
         get() = _ballCount
@@ -18,5 +20,10 @@ class Answer {
                 _ballCount++
             }
         }
+    }
+
+    fun initCount() {
+        _ballCount = ZERO
+        _strikeCount = ZERO
     }
 }

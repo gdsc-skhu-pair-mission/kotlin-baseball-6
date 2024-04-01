@@ -10,4 +10,15 @@ object Constants {
     const val RESTART_MESSAGE = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
 
     const val WIN_COUNT = 3
+
+    const val ZERO = 0
+    const val MIN_NUMBER = 1
+    const val MAX_NUMBER = 9
+
+    const val START_FLAG = "1"
+    const val END_FLAG = "2"
+
+    const val NUMBER_SIZE = 3
+
+    const val SEPARATOR = ""
 }
