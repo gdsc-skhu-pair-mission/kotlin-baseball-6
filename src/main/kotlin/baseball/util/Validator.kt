@@ -4,8 +4,8 @@ object Validator {
     fun validateNumber (input: String) { //사용자 입력 유효성 검사
         validateNull(input)
         validateValue(input)
-        validateDuplicate(input)
         validateLength(input)
+        validateDuplicate(input)
     }
 
     fun validateFlag (input: String) { //게임 플래그 유효성 검사
