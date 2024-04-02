@@ -34,7 +34,7 @@ fun main() {
 fun playGame() {
     val computerNumberList = makeRandomNumbersOfList()
 
-    var result:MutableMap<String, Int> = mutableMapOf(NUMBER_OF_BALL to 0, NUMBER_OF_STRIKE to 0)
+    var result:Map<String, Int> = mutableMapOf(NUMBER_OF_BALL to 0, NUMBER_OF_STRIKE to 0)
 
     while (result[NUMBER_OF_STRIKE] != NUMBER_OF_DIGITS) {
         print(MESSAGE_OF_INPUT)
@@ -73,7 +73,7 @@ fun makePlayerNumbersOfList(input: String):MutableList<Int> {
 fun getResult(
     computerNumberList: MutableList<Int>,
     userNumberList: MutableList<Int>
-): MutableMap<String, Int> {
+): Map<String, Int> {
 
     val numberOfStrike: Int =
         userNumberList.count { computerNumberList.indexOf(it) == userNumberList.indexOf(it)}
@@ -82,11 +82,11 @@ fun getResult(
         userNumberList.count { computerNumberList.contains(it) } - numberOfStrike
 
 
-    val result = mutableMapOf(NUMBER_OF_BALL to numberOfBall, NUMBER_OF_STRIKE to numberOfStrike)
+    val result = mapOf(NUMBER_OF_BALL to numberOfBall, NUMBER_OF_STRIKE to numberOfStrike)
     return result
 }
 
-fun printResult(result: MutableMap<String, Int>) {
+fun printResult(result: Map<String, Int>) {
     if (result[NUMBER_OF_STRIKE] == NUMBER_OF_DIGITS) {
         println("${NUMBER_OF_DIGITS}${WORD_OF_STRIKE}")
         println(MESSAGE_OF_WIN)
