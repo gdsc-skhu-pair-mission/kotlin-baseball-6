@@ -34,7 +34,7 @@ fun main() {
 fun playGame() {
     val computerNumberList = makeRandomNumbersOfList()
 
-    var result:Map<String, Int> = mutableMapOf(NUMBER_OF_BALL to 0, NUMBER_OF_STRIKE to 0)
+    var result:Map<String, Int> = mapOf(NUMBER_OF_BALL to 0, NUMBER_OF_STRIKE to 0)
 
     while (result[NUMBER_OF_STRIKE] != NUMBER_OF_DIGITS) {
         print(MESSAGE_OF_INPUT)
