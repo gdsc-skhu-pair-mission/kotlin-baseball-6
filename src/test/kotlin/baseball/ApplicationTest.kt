@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInRangeT
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -21,11 +22,55 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
-    fun `예외 테스트`() {
+    fun 세_자리가_아닌_숫자_입력_시_예외_테스트() {
         assertSimpleTest {
             assertThrows<IllegalArgumentException> { runException("1234") }
         }
     }
+
+    @Test
+    fun 문자_입력_시_예외_테스트() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("가나다") }
+        }
+    }
+
+    @Test
+    fun 중복된_숫자_입력_시_예외_테스트() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("111") }
+        }
+    }
+
+    @Test
+    fun 음수_입력_시_예외_테스트() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("-123") }
+        }
+    }
+
+    @Test
+    fun 소수_입력_시_예외_테스트() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException("123.123") }
+        }
+    }
+
+    @Test
+    fun 공백_문자_입력_시_예외_테스트() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> { runException(" ") }
+        }
+    }
+
+    @Test
+    fun 아무것도_입력하지_않은_경우_예외_테스트() {
+        assertSimpleTest {
+            val exception = assertThrows<IllegalArgumentException> { checkExceptionOnInput("") }
+            assertEquals("아무것도 입력하지 않았습니다. 숫자를 입력해주세요.", exception.message)
+        }
+    }
+
 
     override fun runMain() {
         main()
