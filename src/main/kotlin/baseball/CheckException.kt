@@ -1,9 +1,16 @@
 package baseball
 
 fun checkExceptionOnInput(input: String) {
+    isEmpty(input)
     isInteger(input)
     isContainsDuplicated(input)
     isCorrectNumberOfDigit(input)
+}
+
+fun isEmpty(input: String) {
+    if (input.isEmpty()) {
+        throw IllegalArgumentException("아무것도 입력하지 않았습니다. 숫자를 입력해주세요.")
+    }
 }
 
 fun isInteger(input: String) {

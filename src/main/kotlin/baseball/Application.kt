@@ -76,7 +76,7 @@ fun getResult(
 ): Map<String, Int> {
 
     val numberOfStrike: Int =
-        userNumberList.count { computerNumberList.indexOf(it) == userNumberList.indexOf(it)}
+        userNumberList.count { computerNumberList.indexOf(it) == userNumberList.indexOf(it) }
 
     val numberOfBall: Int =
         userNumberList.count { computerNumberList.contains(it) } - numberOfStrike
