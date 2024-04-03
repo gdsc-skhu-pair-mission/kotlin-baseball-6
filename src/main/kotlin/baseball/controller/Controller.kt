@@ -12,19 +12,23 @@ class Controller(
     private val inputView: Input,
     private val outputView: Output,
 ) {
-    private var user = User()
-    private var number = Number()
-    private var answer = Answer()
-    private var flag = Flag()
+    private val user = User()
+    private val number = Number()
+    private val answer = Answer()
+    private val flag = Flag()
 
     fun game() {
         outputView.printStartMessage()
-        do {
-            processGame()
-            if (answer.strikeCount == WIN_COUNT) {
-                exitGame()
-            }
-        } while (flag.flag)
+        while (flag.flag) {
+            playRound()
+        }
+    }
+
+    private fun playRound() {
+        processGame()
+        if (answer.strikeCount == WIN_COUNT) {
+            exitGame()
+        }
     }
 
     private fun processGame() {
@@ -42,7 +46,7 @@ class Controller(
         }
     }
 
-    private fun getGameFlag() { //게임 플래그 입력
+    private fun getGameFlag() {
         var isValid = false
         while(!isValid) {
             try {
@@ -55,13 +59,13 @@ class Controller(
         }
     }
 
-    private fun showResult() { //매칭 결과 출력
+    private fun showResult() {
         val ball = answer.ballCount
         val strike = answer.strikeCount
         outputView.printResultMessage(ball, strike)
     }
 
-    private fun getUserNumber() { //사용자 입력
+    private fun getUserNumber() {
         var isValid = false
         while(!isValid) {
             try {
@@ -74,7 +78,7 @@ class Controller(
         }
     }
 
-    private fun calculate() { //매칭 결과 계산
+    private fun calculate() {
         val number = number.number
         val input = user.input
         answer.initCount()
