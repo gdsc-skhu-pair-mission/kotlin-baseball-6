@@ -12,21 +12,21 @@ class Controller(
     private val inputView: Input,
     private val outputView: Output,
 ) {
-    private val user = User()
     private val number = Number()
-    private val answer = Answer()
-    private val flag = Flag()
+    private var user = User()
+    private var answer = Answer()
+    private var flag = Flag()
 
     fun game() {
         outputView.printStartMessage()
-        while (flag.flag) {
+        while (flag.checkFlag()) {
             playRound()
         }
     }
 
     private fun playRound() {
         processGame()
-        if (answer.strikeCount == WIN_COUNT) {
+        if (answer.checkAnswer()) {
             exitGame()
         }
     }
@@ -41,7 +41,7 @@ class Controller(
     private fun exitGame() {
         outputView.printEndMessage()
         getGameFlag()
-        if(flag.flag) {
+        if(flag.checkFlag()) {
             number.generateNumber()
         }
     }
@@ -51,7 +51,7 @@ class Controller(
         while(!isValid) {
             try {
                 val input = inputView.getFlag()
-                flag.setFlag(input)
+                flag = Flag.changeFlag(input)
                 isValid = true
             } catch (e: IllegalArgumentException) {
                 print(e.message)
@@ -60,9 +60,8 @@ class Controller(
     }
 
     private fun showResult() {
-        val ball = answer.ballCount
-        val strike = answer.strikeCount
-        outputView.printResultMessage(ball, strike)
+        val count = answer.createDTO()
+        outputView.printResultMessage(count.ballCount, count.strikeCount)
     }
 
     private fun getUserNumber() {
@@ -70,7 +69,7 @@ class Controller(
         while(!isValid) {
             try {
                 val input = inputView.getNumber()
-                user.setInput(input)
+                user = User.changeInput(input)
                 isValid = true
             } catch(e: IllegalArgumentException) {
                 print(e.message)
@@ -79,9 +78,7 @@ class Controller(
     }
 
     private fun calculate() {
-        val number = number.number
-        val input = user.input
-        answer.initCount()
-        answer.calculateResult(number, input!!)
+        answer = Answer.initCount()
+        answer.calculateResult(number, user)
     }
 }
