@@ -1,29 +1,43 @@
 package baseball.model
 
+import baseball.dto.AnswerDTO
+import baseball.util.Constants.WIN_COUNT
 import baseball.util.Constants.ZERO
 
-class Answer {
-    private var _ballCount = ZERO
-    private var _strikeCount = ZERO
+class Answer(private var _ballCount: Int = ZERO, private var _strikeCount: Int = ZERO) {
 
-    val ballCount: Int
-        get() = _ballCount
-    val strikeCount: Int
-        get() = _strikeCount
+    fun checkAnswer(): Boolean {
+        return _strikeCount == WIN_COUNT
+    }
 
-    fun calculateResult(answer: String, input: String) {
+    fun calculateResult(number: Number, user: User) {
+        val answer = number.number
+        val input = user.input!!
         for (i in answer.indices) {
-            if (answer[i] == input[i]) {
-                _strikeCount++
-            }
-            if (answer[i] != input[i] && input[i] in answer) {
-                _ballCount++
-            }
+            calculateBall(answer, input, i)
+            calculateStrike(answer, input, i)
         }
     }
 
-    fun initCount() {
-        _ballCount = ZERO
-        _strikeCount = ZERO
+    fun createDTO(): AnswerDTO {
+        return AnswerDTO(ballCount = _ballCount, strikeCount = _strikeCount)
+    }
+
+    private fun calculateBall(answer: String, input: String, index: Int) {
+        if (answer[index] != input[index] && input[index] in answer) {
+            _ballCount++
+        }
+    }
+
+    private fun calculateStrike(answer: String, input: String, index: Int) {
+        if (answer[index] == input[index]) {
+            _strikeCount++
+        }
+    }
+
+    companion object {
+        fun initCount(): Answer {
+            return Answer(0, 0)
+        }
     }
 }
