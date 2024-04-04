@@ -56,7 +56,7 @@ fun makeRandomNumbersOfList(): List<Int> {
 }
 
 fun makePlayerNumbersOfList(input: String):List<Int> {
-    checkExceptionOnInput(input)
+    validateExceptionOnInput(input)
 
     val userNumbers = mutableListOf<Int>()
     for (i in 0 until NUMBER_OF_DIGITS) {
