@@ -7,10 +7,10 @@ import baseball.util.Constants.SEPARATOR
 import camp.nextstep.edu.missionutils.Randoms
 
 class Number {
-    private lateinit var _number: String
+    private lateinit var _randomNumber: String
 
-    val number: String
-        get() = _number
+    val randomNumber: String
+        get() = _randomNumber
 
     init {
         generateNumber()
@@ -24,6 +24,6 @@ class Number {
                 number.add(randomNumber)
             }
         }
-        _number = number.joinToString(SEPARATOR)
+        _randomNumber = number.joinToString(SEPARATOR)
     }
 }

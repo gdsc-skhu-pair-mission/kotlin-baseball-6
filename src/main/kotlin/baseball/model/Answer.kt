@@ -11,7 +11,7 @@ class Answer(private var _ballCount: Int = ZERO, private var _strikeCount: Int =
     }
 
     fun calculateResult(number: Number, user: User) {
-        val answer = number.number
+        val answer = number.randomNumber
         val input = user.input!!
         for (i in answer.indices) {
             calculateBall(answer, input, i)
