@@ -37,7 +37,7 @@ class Answer(private var _ballCount: Int = ZERO, private var _strikeCount: Int =
 
     companion object {
         fun initCount(): Answer {
-            return Answer(0, 0)
+            return Answer(ZERO, ZERO)
         }
     }
 }
