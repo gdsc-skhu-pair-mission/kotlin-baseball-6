@@ -66,7 +66,7 @@ class ApplicationTest : NsTest() {
     @Test
     fun 아무것도_입력하지_않은_경우_예외_테스트() {
         assertSimpleTest {
-            val exception = assertThrows<IllegalArgumentException> { checkExceptionOnInput("") }
+            val exception = assertThrows<IllegalArgumentException> { validateExceptionOnInput("") }
             assertEquals("아무것도 입력하지 않았습니다. 숫자를 입력해주세요.", exception.message)
         }
     }
