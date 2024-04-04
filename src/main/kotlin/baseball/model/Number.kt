@@ -17,13 +17,11 @@ class Number {
     }
 
     fun generateNumber() {
-        val number = mutableListOf<Int>()
-        while(number.size < NUMBER_SIZE) {
+        val numberSet = mutableSetOf<Int>()
+        while (numberSet.size < NUMBER_SIZE) {
             val randomNumber = Randoms.pickNumberInRange(MIN_NUMBER, MAX_NUMBER)
-            if (randomNumber !in number) {
-                number.add(randomNumber)
-            }
+            numberSet.add(randomNumber)
         }
-        _randomNumber = number.joinToString(SEPARATOR)
+        _randomNumber = numberSet.joinToString(SEPARATOR)
     }
 }
