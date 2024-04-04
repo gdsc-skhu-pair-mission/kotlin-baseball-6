@@ -32,13 +32,13 @@ fun main() {
 }
 
 fun playGame() {
-    val computerNumberList = makeRandomNumbersOfList()
+    val computerNumberList:List<Int> = makeRandomNumbersOfList()
 
     var result:Map<String, Int> = mapOf(NUMBER_OF_BALL to 0, NUMBER_OF_STRIKE to 0)
 
     while (result[NUMBER_OF_STRIKE] != NUMBER_OF_DIGITS) {
         print(MESSAGE_OF_INPUT)
-        val playerNumberList = Console.readLine()?.let { makePlayerNumbersOfList(it) }
+        val playerNumberList:List<Int>? = Console.readLine()?.let { makePlayerNumbersOfList(it) }
 
         if (playerNumberList != null) {
             result = getResult(computerNumberList, playerNumberList)
@@ -48,18 +48,14 @@ fun playGame() {
 
 }
 
-fun makeRandomNumbersOfList(): MutableList<Int> {
-    val computerNumberList = mutableListOf<Int>()
-    while (computerNumberList.size < NUMBER_OF_DIGITS) {
-        val randomNumber = Randoms.pickNumberInRange(1, 9)
-        if (!computerNumberList.contains(randomNumber)) {
-            computerNumberList.add(randomNumber)
-        }
-    }
-    return computerNumberList
+fun makeRandomNumbersOfList(): List<Int> {
+    return generateSequence { Randoms.pickNumberInRange(1, 9) }
+        .distinct()
+        .take(NUMBER_OF_DIGITS)
+        .toList()
 }
 
-fun makePlayerNumbersOfList(input: String):MutableList<Int> {
+fun makePlayerNumbersOfList(input: String):List<Int> {
     checkExceptionOnInput(input)
 
     val userNumbers = mutableListOf<Int>()
@@ -67,12 +63,12 @@ fun makePlayerNumbersOfList(input: String):MutableList<Int> {
         userNumbers.add(input[i].digitToInt())
     }
 
-    return userNumbers
+    return userNumbers.toList()
 }
 
 fun getResult(
-    computerNumberList: MutableList<Int>,
-    userNumberList: MutableList<Int>
+    computerNumberList: List<Int>,
+    userNumberList: List<Int>
 ): Map<String, Int> {
 
     val numberOfStrike: Int =
