@@ -14,7 +14,7 @@ fun isEmpty(input: String) {
 fun isInteger(input: String) {
     try{
         input.toInt()
-    } catch (e: Exception) {
+    } catch (e: NumberFormatException) {
         throw IllegalArgumentException("숫자를 입력해주세요.")
     }
 }
